@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可愛狗狗品種圖鑑 🐾</title>
+    <!-- 引入 Google 字體：圓潤可愛的字型適合兒童閱讀 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ====== 色彩計畫與全局設定 ====== */
+        :root {
+            --bg-off-white: #FCFAEF;     /* 米白底色 */
+            --sage-green: #9CB4A6;       /* 森林鼠尾草綠 */
+            --soft-purple: #D1C5E4;      /* 柔和淺紫色 */
+            --warm-yellow: #FBE285;      /* 陽光暖黃 */
+            --text-dark: #4A4A4A;        /* 深灰字體（比純黑更溫和） */
+        }
+
+        body {
+            font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-off-white);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            /* 基礎大字體設計 */
+            font-size: 18px; 
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ====== 標題區塊 ====== */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--warm-yellow);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #5D5441;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #7B7258;
+        }
+
+        /* ====== 卡片網格區塊 ====== */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* ====== 生動的卡片設計 ====== */
+        .dog-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+            cursor: pointer;
+            border: 4px solid transparent;
+        }
+
+        .dog-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        /* 個別卡片的邊框顏色點綴 */
+        .card-green:hover { border-color: var(--sage-green); }
+        .card-purple:hover { border-color: var(--soft-purple); }
+        .card-yellow:hover { border-color: var(--warm-yellow); }
+
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+            font-weight: 900;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .tag-green { background-color: var(--sage-green); color: white; }
+        .tag-purple { background-color: var(--soft-purple); color: #5B487A; }
+        .tag-yellow { background-color: var(--warm-yellow); color: #7B6824; }
+
+        .card-desc {
+            font-size: 1.1rem;
+            margin: 0;
+            color: #666;
+        }
+
+        /* ====== 頁尾低對比標註 ====== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .source-note {
+            font-size: 0.9rem;
+            color: #C0C0C0; /* 低對比文字 */
+            opacity: 0.7;
+            user-select: none;
+        }
+        
+        /* 互動小動畫：點擊時產生波紋特效的感覺 */
+        .dog-card:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🐾 狗狗品種大探索 🐾</h1>
+        <p>點擊狗狗卡片，認識這些可愛的好朋友！</p>
+    </header>
+
+    <main id="card-container">
+        <!-- 卡片內容將由 JavaScript 動態生成 -->
+    </main>
+
+    <footer>
+        <p class="source-note">圖片來源與資料參考：農業部動物保護資訊網（此為版面測試用圖鑑，非官方正式發布資料）</p>
+    </footer>
+
+    <script>
+        // 狗狗圖鑑資料陣列 (真實圖片來源: Unsplash)
+        const dogsData = [
+            {
+                name: "黃金獵犬",
+                englishName: "Golden Retriever",
+                theme: "yellow",
+                trait: "溫柔暖男 ☀️",
+                img: "https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                desc: "個性超級溫和又友善，是小朋友最棒的玩伴！他們非常聰明，最喜歡玩「你丟我撿」的遊戲了。"
+            },
+            {
+                name: "柴犬",
+                englishName: "Shiba Inu",
+                theme: "green",
+                trait: "忠誠傲嬌 🍃",
+                img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                desc: "來自日本的狗狗，立體的小耳朵和捲捲的尾巴是招牌！個性很愛乾淨，雖然有時候有點小固執，但對家人非常忠心。"
+            },
+            {
+                name: "法國鬥牛犬",
+                englishName: "French Bulldog",
+                theme: "purple",
+                trait: "活潑小豬 🐷",
+                img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                desc: "有著大大的蝙蝠耳朵和無辜的扁臉。雖然看起來很壯，但其實很喜歡撒嬌，是陪伴大家在沙發上放鬆的好朋友！"
+            }
+        ];
+
+        // 取得容器元素
+        const container = document.getElementById('card-container');
+
+        // 動態生成 HTML
+        dogsData.forEach(dog => {
+            // 建立卡片元素
+            const card = document.createElement('article');
+            card.className = `dog-card card-${dog.theme}`;
+            
+            card.innerHTML = `
+                <img src="${dog.img}" alt="${dog.name}" class="card-img" loading="lazy">
+                <div class="card-content">
+                    <h2 class="card-title">${dog.name}</h2>
+                    <span class="tag tag-${dog.theme}">${dog.trait}</span>
+                    <p class="card-desc">${dog.desc}</p>
+                </div>
+            `;
+
+            // 加入簡單的音效或互動提示
+            card.addEventListener('click', () => {
+                alert(`汪汪！我是${dog.name} (${dog.englishName})！很高興認識你 🦴`);
+            });
+
+            // 將卡片放入容器中
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
